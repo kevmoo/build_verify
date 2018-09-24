@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kevmoo/build_verify.svg?branch=master)](https://travis-ci.org/kevmoo/build_verify)
+
 Test utility to ensure generated Dart code within a package is up-to-date
 when using `package:build`.
 
