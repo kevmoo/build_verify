@@ -13,3 +13,5 @@ final String _sdkDir = (() {
 
 final String pubPath =
     p.join(_sdkDir, 'bin', Platform.isWindows ? 'pub.bat' : 'pub');
+
+final String dartPath = p.join(_sdkDir, 'bin', 'dart');
