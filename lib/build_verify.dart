@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'src/impl.dart';
 
 const defaultCommand = [
@@ -19,6 +20,7 @@ const defaultCommand = [
 void expectBuildClean(
     {String packageRelativeDirectory,
     List<String> customCommand = defaultCommand}) {
-  return expectBuildCleanImpl(customCommand ?? defaultCommand,
+  return expectBuildCleanImpl(Directory.current.resolveSymbolicLinksSync(),
+      customCommand ?? defaultCommand,
       packageRelativeDirectory: packageRelativeDirectory);
 }
