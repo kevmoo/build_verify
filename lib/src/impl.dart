@@ -37,12 +37,15 @@ void expectBuildCleanImpl(
   // 2 - run build - should be no output, since nothing should change
   var result = _runProc(executable, arguments, workingDir);
 
-  printOnFailure(result);
-  expect(result,
-      contains(RegExp(r'\[INFO\] Succeeded after \S+ with \d+ outputs')));
+  expectResultOutputSucceeds(result);
 
   // 3 - get a list of modified files after the build - should still be empty
   expect(_changedGeneratedFiles(workingDir), isEmpty);
+}
+
+void expectResultOutputSucceeds(String result) {
+  expect(result,
+      contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')));
 }
 
 final _whitespace = RegExp(r'\s');
