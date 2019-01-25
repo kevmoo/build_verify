@@ -32,11 +32,11 @@ const packageVersion = '1.2.3';
       ])
     ]).create();
 
-    var gitDir = await GitDir.init(Directory(d.sandbox), allowContent: true);
+    final gitDir = await GitDir.init(Directory(d.sandbox), allowContent: true);
     await gitDir.runCommand(['add', '.']);
     await gitDir.runCommand(['commit', '-am', 'test']);
 
-    var process = await TestProcess.start(
+    final process = await TestProcess.start(
         pubPath, ['get', '--offline', '--no-precompile'],
         workingDirectory: d.sandbox);
 
