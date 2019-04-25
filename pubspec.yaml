@@ -7,7 +7,7 @@ homepage: https://github.com/kevmoo/build_verify
 author: Kevin Moore <kevmoo@google.com>
 
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.2.0 <3.0.0'
 
 dependencies:
   path: ^1.0.0
@@ -17,7 +17,7 @@ dev_dependencies:
   build: ^1.0.0
   build_runner: ^1.0.0
   build_version: ^2.0.0
-  git: ^0.5.1+1
+  git: ^1.0.0
   pedantic: ^1.1.0
   test_descriptor: ^1.1.1
   test_process: ^1.0.4
