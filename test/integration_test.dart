@@ -1,7 +1,5 @@
 @Timeout.factor(4)
 
-import 'dart:io';
-
 import 'package:build_verify/build_verify.dart' show defaultCommand;
 import 'package:build_verify/src/impl.dart';
 import 'package:build_verify/src/utils.dart';
@@ -32,7 +30,7 @@ const packageVersion = '1.2.3';
       ])
     ]).create();
 
-    final gitDir = await GitDir.init(Directory(d.sandbox), allowContent: true);
+    final gitDir = await GitDir.init(d.sandbox, allowContent: true);
     await gitDir.runCommand(['add', '.']);
     await gitDir.runCommand(['commit', '-am', 'test']);
 

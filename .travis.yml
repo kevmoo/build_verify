@@ -2,7 +2,7 @@ language: dart
 
 dart:
   - dev
-  - 2.0.0
+  - 2.2.0
 
 dart_task:
   - test: -x presubmit-only
@@ -15,7 +15,7 @@ matrix:
       dartanalyzer: --fatal-infos --fatal-warnings .
   - dart: dev
     dart_task: dartfmt
-  - dart: 2.0.0
+  - dart: 2.2.0
     dart_task:
       dartanalyzer: --fatal-warnings .
 
