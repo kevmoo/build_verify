@@ -1,8 +1,9 @@
 import 'dart:io';
+
 import 'src/impl.dart';
 
 const defaultCommand = [
-  'PUB',
+  pubPlaceHolder,
   'run',
   'build_runner',
   'build',
@@ -14,13 +15,15 @@ const defaultCommand = [
 /// The first item in [customCommand] is used as the executable to run. The
 /// remaining values are used as the executable arguments.
 ///
-/// If the first value is `PUB` or `DART`, it will be replaced with the full,
-/// platform-specific path to the corresponding executable in the currently
-/// executing SDK.
-void expectBuildClean(
-    {String packageRelativeDirectory,
-    List<String> customCommand = defaultCommand}) {
-  return expectBuildCleanImpl(Directory.current.resolveSymbolicLinksSync(),
+/// If the first value is `PUB` or `DART` (case-sensitive), it will be replaced
+/// with the full, platform-specific path to the corresponding executable in the
+/// currently executing SDK.
+void expectBuildClean({
+  String packageRelativeDirectory,
+  List<String> customCommand = defaultCommand,
+}) =>
+    expectBuildCleanImpl(
+      Directory.current.resolveSymbolicLinksSync(),
       customCommand ?? defaultCommand,
-      packageRelativeDirectory: packageRelativeDirectory);
-}
+      packageRelativeDirectory: packageRelativeDirectory,
+    );
