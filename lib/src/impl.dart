@@ -6,6 +6,8 @@ import 'package:test/test.dart';
 
 import 'utils.dart';
 
+const pubPlaceHolder = 'PUB';
+
 void expectBuildCleanImpl(
   String workingDir,
   List<String> command, {
@@ -27,7 +29,7 @@ void expectBuildCleanImpl(
   expect(_changedGeneratedFiles(workingDir), isEmpty);
 
   var executable = command.first;
-  if (executable == 'PUB') {
+  if (executable == pubPlaceHolder) {
     executable = pubPath;
   } else if (executable == 'DART') {
     executable = dartPath;
