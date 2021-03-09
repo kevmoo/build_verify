@@ -1,3 +1,8 @@
+## 2.0.0-dev
+
+- Require Dart `2.12.0`.
+- Enable null safety.
+
 ## 1.1.1
 
 - Properly report good builds that take >= 1 minute.
