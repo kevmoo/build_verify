@@ -19,11 +19,11 @@ const defaultCommand = [
 /// with the full, platform-specific path to the corresponding executable in the
 /// currently executing SDK.
 void expectBuildClean({
-  String packageRelativeDirectory,
+  String? packageRelativeDirectory,
   List<String> customCommand = defaultCommand,
 }) =>
     expectBuildCleanImpl(
       Directory.current.resolveSymbolicLinksSync(),
-      customCommand ?? defaultCommand,
+      customCommand,
       packageRelativeDirectory: packageRelativeDirectory,
     );

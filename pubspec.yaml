@@ -2,12 +2,11 @@ name: build_verify
 description: >-
   Test utility to ensure generated Dart code within a package is up-to-date
   when using package:build.
-version: 1.1.2-dev
-homepage: https://github.com/kevmoo/build_verify
-author: Kevin Moore <kevmoo@google.com>
+version: 2.0.0-dev
+repository: https://github.com/kevmoo/build_verify
 
 environment:
-  sdk: '>=2.2.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   path: ^1.0.0
@@ -17,7 +16,7 @@ dev_dependencies:
   build: ^1.0.0
   build_runner: ^1.0.0
   build_version: ^2.0.0
-  git: ^1.0.0
+  git: ^2.0.0
   pedantic: ^1.1.0
-  test_descriptor: ^1.1.1
-  test_process: ^1.0.4
+  test_descriptor: ^2.0.0
+  test_process: ^2.0.0
