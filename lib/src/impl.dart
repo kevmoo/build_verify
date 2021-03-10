@@ -11,7 +11,7 @@ const pubPlaceHolder = 'PUB';
 void expectBuildCleanImpl(
   String workingDir,
   List<String> command, {
-  String packageRelativeDirectory,
+  String? packageRelativeDirectory,
 }) {
   if (command.isEmpty) {
     throw ArgumentError.value(command, 'customCommand', 'Cannot be empty');
