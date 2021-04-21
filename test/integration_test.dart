@@ -14,10 +14,10 @@ void main() {
 name: example
 version: 1.2.3
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dev_dependencies:
-  build_runner: ^1.0.0
+  build_runner: ^2.0.0
   build_version: ^2.0.0
 ''').create();
 
@@ -41,7 +41,7 @@ const packageVersion = '1.2.3';
     await process.shouldExit(0);
   });
 
-  test('succes unit test', () async {
+  test('success unit test', () async {
     expectBuildCleanImpl(d.sandbox, defaultCommand);
   });
 }
