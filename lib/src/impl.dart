@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
@@ -26,7 +25,11 @@ void expectBuildCleanImpl(
   }
 
   // 1 - get a list of modified files files - should be empty
-  expect(_changedGeneratedFiles(workingDir), isEmpty);
+  expect(
+    _changedGeneratedFiles(workingDir),
+    isEmpty,
+    reason: 'The working directory should be clean before running build.',
+  );
 
   var executable = command.first;
   if (executable == pubPlaceHolder) {
@@ -51,16 +54,8 @@ void expectResultOutputSucceeds(String result) {
       contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')));
 }
 
-final _whitespace = RegExp(r'\s');
-
-Set<String> _changedGeneratedFiles(String workingDir) {
-  final output = _runProc('git', ['status', '--porcelain'], workingDir);
-
-  return LineSplitter.split(output)
-      .map((line) => line.split(_whitespace).last)
-      .where((path) => path.endsWith('.dart'))
-      .toSet();
-}
+String _changedGeneratedFiles(String workingDir) =>
+    _runProc('git', ['diff'], workingDir);
 
 String _runProc(String proc, List<String> args, String workingDir) {
   final result = Process.runSync(proc, args, workingDirectory: workingDir);
