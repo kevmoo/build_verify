@@ -10,7 +10,9 @@ import 'package:test_process/test_process.dart';
 
 void main() {
   setUp(() async {
-    await d.file('pubspec.yaml', '''
+    await d.file(
+      'pubspec.yaml',
+      '''
 name: example
 version: 1.2.3
 environment:
@@ -19,14 +21,18 @@ environment:
 dev_dependencies:
   build_runner: ^2.0.0
   build_version: ^2.0.0
-''').create();
+''',
+    ).create();
 
     await d.dir('lib', [
       d.dir('src', [
-        d.file('version.dart', r'''
+        d.file(
+          'version.dart',
+          r'''
 // Generated code. Do not modify.
 const packageVersion = '1.2.3';
-''')
+''',
+        )
       ])
     ]).create();
 
@@ -35,13 +41,15 @@ const packageVersion = '1.2.3';
     await gitDir.runCommand(['commit', '-am', 'test']);
 
     final process = await TestProcess.start(
-        pubPath, ['get', '--offline', '--no-precompile'],
-        workingDirectory: d.sandbox);
+      dartPath,
+      ['pub', 'get'],
+      workingDirectory: d.sandbox,
+    );
 
     await process.shouldExit(0);
   });
 
   test('success unit test', () async {
-    expectBuildCleanImpl(d.sandbox, defaultCommand);
+    await expectBuildCleanImpl(d.sandbox, defaultCommand);
   });
 }

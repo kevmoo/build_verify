@@ -3,15 +3,19 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 /// The path to the root directory of the SDK.
-final String _sdkDir = (() {
-  // The Dart executable is in "/path/to/sdk/bin/dart", so two levels up is
-  // "/path/to/sdk".
-  final aboveExecutable = p.dirname(p.dirname(Platform.resolvedExecutable));
-  assert(FileSystemEntity.isFileSync(p.join(aboveExecutable, 'version')));
-  return aboveExecutable;
+final String dartPath = (() {
+  final executableBaseName = p.basename(Platform.resolvedExecutable);
+
+  if (executableBaseName == 'flutter_tester' ||
+      executableBaseName == 'flutter_tester.exe') {
+    final flutterRoot = Platform.environment['FLUTTER_ROOT']!;
+
+    return p.join(flutterRoot, 'bin', 'cache', 'dart-sdk', 'bin', 'dart');
+  } else {
+    assert(
+      executableBaseName == 'dart' || executableBaseName == 'dart.exe',
+      'Was not expected "$executableBaseName".',
+    );
+    return Platform.resolvedExecutable;
+  }
 })();
-
-final String pubPath =
-    p.join(_sdkDir, 'bin', Platform.isWindows ? 'pub.bat' : 'pub');
-
-final String dartPath = p.join(_sdkDir, 'bin', 'dart');

@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'src/impl.dart';
 
+/// The default value for `customCommand` in [expectBuildClean].
 const defaultCommand = [
-  pubPlaceHolder,
+  dartPlaceHolder,
   'run',
   'build_runner',
   'build',
@@ -18,7 +19,7 @@ const defaultCommand = [
 /// If the first value is `PUB` or `DART` (case-sensitive), it will be replaced
 /// with the full, platform-specific path to the corresponding executable in the
 /// currently executing SDK.
-void expectBuildClean({
+Future<void> expectBuildClean({
   String? packageRelativeDirectory,
   List<String> customCommand = defaultCommand,
 }) =>
