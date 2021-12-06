@@ -1,4 +1,10 @@
-## 2.0.1-dev
+## 3.0.0
+
+- `expectBuildClean` is now async. (Returns `Future<void>` instead of `void`.)
+- `defaultCommand` now uses `dart run build_runner...`.
+- Now supports `flutter test`.
+- Executed commands are now printed to the console.
+- Require Dart `2.12.3`.
 
 ## 2.0.0
 

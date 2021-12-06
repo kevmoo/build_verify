@@ -18,8 +18,10 @@ void main() {
     test('failing output with ${_humanReadable(duration)}', () {
       final output = '[INFO] Failed after ${_humanReadable(duration)}';
 
-      expect(() => expectResultOutputSucceeds(output),
-          throwsA(const TypeMatcher<TestFailure>()));
+      expect(
+        () => expectResultOutputSucceeds(output),
+        throwsA(const TypeMatcher<TestFailure>()),
+      );
     });
   }
 }
