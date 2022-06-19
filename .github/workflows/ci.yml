@@ -23,7 +23,7 @@ jobs:
         sdk: [dev]
     steps:
       - uses: actions/checkout@v2
-      - uses: dart-lang/setup-dart@v1.0
+      - uses: dart-lang/setup-dart@v1.3
         with:
           sdk: ${{ matrix.sdk }}
       - id: install
@@ -45,7 +45,7 @@ jobs:
         sdk: [2.12.3, dev]
     steps:
     - uses: actions/checkout@v2
-    - uses: dart-lang/setup-dart@v1.0
+    - uses: dart-lang/setup-dart@v1.3
       with:
         sdk: ${{ matrix.sdk }}
     - id: install
@@ -68,9 +68,9 @@ jobs:
         flutter-channel: [beta, stable]
     steps:
     - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v1.5.3
+    - uses: subosito/flutter-action@v2.4.0
       with:
-        flutter-channel: ${{ matrix.flutter-channel }}
+        channel: ${{ matrix.flutter-channel }}
     - id: install
       run: dart pub get
     - name: make git happy
