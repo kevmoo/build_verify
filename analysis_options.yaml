@@ -33,7 +33,6 @@ linter:
   - prefer_const_declarations
   - prefer_expression_function_bodies
   - prefer_final_locals
-  - prefer_interpolation_to_compose_strings
   - prefer_relative_imports
   - prefer_single_quotes
   - require_trailing_commas
@@ -44,8 +43,8 @@ linter:
   - unawaited_futures
   - unnecessary_await_in_return
   - unnecessary_lambdas
-  - unnecessary_null_aware_assignments
   - unnecessary_parenthesis
   - unnecessary_statements
   - use_is_even_rather_than_modulo
   - use_string_buffers
+  - use_super_parameters

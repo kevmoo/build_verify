@@ -1,3 +1,7 @@
+## 3.0.1-dev
+
+- Require Dart >= 2.17.0
+
 ## 3.0.0
 
 - `expectBuildClean` is now async. (Returns `Future<void>` instead of `void`.)
