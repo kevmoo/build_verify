@@ -68,7 +68,7 @@ jobs:
         flutter-channel: [beta, stable]
     steps:
     - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v2.4.0
+    - uses: subosito/flutter-action@v2.8.0
       with:
         channel: ${{ matrix.flutter-channel }}
     - id: install
