@@ -59,7 +59,7 @@ void expectResultOutputSucceeds(String result) {
 }
 
 Future<String> _changedGeneratedFiles(String workingDir) =>
-    _runProc('git', ['diff'], workingDir);
+    _runProc('git', ['diff', '.'], workingDir);
 
 Future<String> _runProc(
   String proc,
