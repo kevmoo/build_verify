@@ -8,31 +8,15 @@ import 'package:test/test.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 import 'package:test_process/test_process.dart';
 
+import 'helpers.dart';
+
 void main() {
   setUp(() async {
-    await d.file(
-      'pubspec.yaml',
-      '''
-name: example
-version: 1.2.3
-environment:
-  sdk: '>=2.12.0 <3.0.0'
-
-dev_dependencies:
-  build_runner: ^2.0.0
-  build_version: ^2.0.0
-''',
-    ).create();
+    await getPubspecYamlFile('example').create();
 
     await d.dir('lib', [
       d.dir('src', [
-        d.file(
-          'version.dart',
-          r'''
-// Generated code. Do not modify.
-const packageVersion = '1.2.3';
-''',
-        )
+        getGeneratedVersionFile('1.2.3'),
       ])
     ]).create();
 

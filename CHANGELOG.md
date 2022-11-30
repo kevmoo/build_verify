@@ -1,5 +1,6 @@
-## 3.0.1-dev
+## 3.0.1
 
+- Run `git diff` only on the current working directory.
 - Require Dart >= 2.17.0
 
 ## 3.0.0

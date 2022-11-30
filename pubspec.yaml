@@ -2,7 +2,7 @@ name: build_verify
 description: >-
   Test utility to ensure generated Dart code within a package is up-to-date
   when using package:build.
-version: 3.0.1-dev
+version: 3.0.1
 repository: https://github.com/kevmoo/build_verify
 
 environment:
