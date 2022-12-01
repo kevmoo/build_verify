@@ -1,6 +1,5 @@
 @Timeout.factor(4)
 
-import 'package:build_verify/build_verify.dart' show defaultCommand;
 import 'package:build_verify/src/impl.dart';
 import 'package:build_verify/src/utils.dart';
 import 'package:git/git.dart';
@@ -16,7 +15,7 @@ void main() {
 
     await d.dir('lib', [
       d.dir('src', [
-        getGeneratedVersionFile('1.2.3'),
+        getGeneratedVersionFile(),
       ])
     ]).create();
 
@@ -34,6 +33,6 @@ void main() {
   });
 
   test('success unit test', () async {
-    await expectBuildCleanImpl(d.sandbox, defaultCommand);
+    await expectBuildCleanImpl(d.sandbox);
   });
 }

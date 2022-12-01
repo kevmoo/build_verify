@@ -5,13 +5,14 @@ import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 
+import '../build_verify.dart';
 import 'utils.dart';
 
 const dartPlaceHolder = 'DART';
 
 Future<void> expectBuildCleanImpl(
-  String workingDir,
-  List<String> command, {
+  String workingDir, {
+  List<String> command = defaultCommand,
   String? packageRelativeDirectory,
 }) async {
   if (command.isEmpty) {
@@ -59,7 +60,7 @@ void expectResultOutputSucceeds(String result) {
 }
 
 Future<String> _changedGeneratedFiles(String workingDir) =>
-    _runProc('git', ['diff', '.'], workingDir);
+    _runProc('git', ['diff', '--relative'], workingDir);
 
 Future<String> _runProc(
   String proc,
@@ -75,30 +76,30 @@ Future<String> _runProc(
   final process = await Process.start(proc, args, workingDirectory: workingDir);
 
   Future<void> transform(
-    Stream<List<int>> standardChannel,
-    List<String> lines,
-  ) =>
+    Stream<List<int>> standardChannel, {
+    List<String>? lines,
+  }) =>
       standardChannel
           .transform(const SystemEncoding().decoder)
           .transform(const LineSplitter())
           .forEach((element) {
         print(element);
-        lines.add(element);
+        lines?.add(element);
       });
 
   final stdoutContent = <String>[];
-  final stderrContent = <String>[];
 
   final result = await Future.wait([
     process.exitCode,
-    transform(process.stderr, stderrContent),
-    transform(process.stdout, stdoutContent),
+    transform(process.stderr),
+    transform(process.stdout, lines: stdoutContent),
   ]);
 
-  final exitCode = result.first as int;
+  final resultExitCode = result.first as int;
 
-  if (exitCode != 0) {
-    throw ProcessException(proc, args, 'Process failed', exitCode);
+  if (resultExitCode != 0) {
+    print('Failed with exit code $resultExitCode');
+    throw ProcessException(proc, args, 'Process failed', resultExitCode);
   }
 
   return stdoutContent.join('\n').trim();
