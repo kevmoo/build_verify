@@ -1,6 +1,8 @@
 import 'package:build_verify/src/impl.dart';
 import 'package:test/test.dart';
 
+import 'test_shared.dart';
+
 void main() {
   for (var duration in [
     const Duration(milliseconds: 99),
@@ -20,7 +22,7 @@ void main() {
 
       expect(
         () => expectResultOutputSucceeds(output),
-        throwsA(const TypeMatcher<TestFailure>()),
+        throwsATestFailure,
       );
     });
   }

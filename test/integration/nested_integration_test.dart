@@ -1,6 +1,5 @@
 @Timeout.factor(4)
 
-import 'package:build_verify/build_verify.dart' show defaultCommand;
 import 'package:build_verify/src/impl.dart';
 import 'package:build_verify/src/utils.dart';
 import 'package:git/git.dart';
@@ -8,6 +7,7 @@ import 'package:test/test.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 import 'package:test_process/test_process.dart';
 
+import '../test_shared.dart';
 import 'helpers.dart';
 
 void main() {
@@ -16,7 +16,7 @@ void main() {
       getPubspecYamlFile('package_a'),
       d.dir('lib', [
         d.dir('src', [
-          getGeneratedVersionFile('1.2.3'),
+          getGeneratedVersionFile(),
         ])
       ])
     ]).create();
@@ -25,7 +25,7 @@ void main() {
       getPubspecYamlFile('package_b'),
       d.dir('lib', [
         d.dir('src', [
-          getGeneratedVersionFile('1.2.3'),
+          getGeneratedVersionFile(),
         ])
       ])
     ]).create();
@@ -56,12 +56,10 @@ void main() {
     () async {
       await expectBuildCleanImpl(
         '${d.sandbox}/package_a',
-        defaultCommand,
         packageRelativeDirectory: 'package_a',
       );
       await expectBuildCleanImpl(
         '${d.sandbox}/package_b',
-        defaultCommand,
         packageRelativeDirectory: 'package_b',
       );
     },
@@ -75,24 +73,22 @@ void main() {
         getPubspecYamlFile('package_b'),
         d.dir('lib', [
           d.dir('src', [
-            getGeneratedVersionFile('1.2.4'),
+            getGeneratedVersionFile(version: '1.2.4'),
           ])
         ])
       ]).create();
 
       await expectBuildCleanImpl(
         '${d.sandbox}/package_a',
-        defaultCommand,
         packageRelativeDirectory: 'package_a',
       );
 
       expect(
         () => expectBuildCleanImpl(
           '${d.sandbox}/package_b',
-          defaultCommand,
           packageRelativeDirectory: 'package_b',
         ),
-        throwsA(const TypeMatcher<TestFailure>()),
+        throwsATestFailure,
       );
     },
   );

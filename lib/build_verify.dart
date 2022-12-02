@@ -25,6 +25,6 @@ Future<void> expectBuildClean({
 }) =>
     expectBuildCleanImpl(
       Directory.current.resolveSymbolicLinksSync(),
-      customCommand,
+      command: customCommand,
       packageRelativeDirectory: packageRelativeDirectory,
     );
