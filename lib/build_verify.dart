@@ -19,12 +19,21 @@ const defaultCommand = [
 /// If the first value is `PUB` or `DART` (case-sensitive), it will be replaced
 /// with the full, platform-specific path to the corresponding executable in the
 /// currently executing SDK.
+///
+/// If provided, [gitDiffPathArguments] are passed as `-- <path>` to `git diff`.
+/// This can be useful if you want to include certain files from the diff
+/// calculation.
+///
+/// For example `[':!pubspec.lock']` can be used to ignore changes to the
+/// `pubspec.lock` file.
 Future<void> expectBuildClean({
   String? packageRelativeDirectory,
   List<String> customCommand = defaultCommand,
+  List<String>? gitDiffPathArguments,
 }) =>
     expectBuildCleanImpl(
       Directory.current.resolveSymbolicLinksSync(),
       command: customCommand,
       packageRelativeDirectory: packageRelativeDirectory,
+      gitDiffPathArguments: gitDiffPathArguments,
     );

@@ -1,3 +1,7 @@
+## 3.1.0
+
+- `expectBuildClean`: add `gitDiffPathArguments` parameter.
+
 ## 3.0.1
 
 - Run `git diff` only on the current working directory.
