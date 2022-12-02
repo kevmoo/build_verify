@@ -1,3 +1,8 @@
+## 3.1.0
+
+- `expectBuildClean`: add `gitDiffPathArguments` parameter.
+- Require Dart >= 2.18.0
+
 ## 3.0.1
 
 - Run `git diff` only on the current working directory.

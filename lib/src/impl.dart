@@ -14,6 +14,7 @@ Future<void> expectBuildCleanImpl(
   String workingDir, {
   List<String> command = defaultCommand,
   String? packageRelativeDirectory,
+  List<String>? gitDiffPathArguments,
 }) async {
   if (command.isEmpty) {
     throw ArgumentError.value(command, 'customCommand', 'Cannot be empty');
@@ -31,7 +32,10 @@ Future<void> expectBuildCleanImpl(
 
   // 1 - get a list of modified files files - should be empty
   expect(
-    await _changedGeneratedFiles(workingDir),
+    await _changedGeneratedFiles(
+      workingDir,
+      gitDiffPathArguments: gitDiffPathArguments,
+    ),
     isEmpty,
     reason: 'The working directory should be clean before running build.',
   );
@@ -49,7 +53,13 @@ Future<void> expectBuildCleanImpl(
   expectResultOutputSucceeds(result);
 
   // 3 - get a list of modified files after the build - should still be empty
-  expect(await _changedGeneratedFiles(workingDir), isEmpty);
+  expect(
+    await _changedGeneratedFiles(
+      workingDir,
+      gitDiffPathArguments: gitDiffPathArguments,
+    ),
+    isEmpty,
+  );
 }
 
 void expectResultOutputSucceeds(String result) {
@@ -59,8 +69,19 @@ void expectResultOutputSucceeds(String result) {
   );
 }
 
-Future<String> _changedGeneratedFiles(String workingDir) =>
-    _runProc('git', ['diff', '--relative'], workingDir);
+Future<String> _changedGeneratedFiles(
+  String workingDir, {
+  required List<String>? gitDiffPathArguments,
+}) =>
+    _runProc(
+      'git',
+      [
+        'diff',
+        '--relative',
+        if (gitDiffPathArguments != null) ...['--', ...gitDiffPathArguments]
+      ],
+      workingDir,
+    );
 
 Future<String> _runProc(
   String proc,
