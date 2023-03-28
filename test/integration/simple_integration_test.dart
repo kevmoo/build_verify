@@ -1,4 +1,5 @@
 @Timeout.factor(4)
+library;
 
 import 'dart:io';
 

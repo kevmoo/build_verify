@@ -77,6 +77,7 @@ jobs:
       run: |
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
+    - run: dart analyze --fatal-infos
     - run: flutter test -x presubmit-only
       if: always() && steps.install.outcome == 'success'
     - run: flutter test --run-skipped -t presubmit-only
