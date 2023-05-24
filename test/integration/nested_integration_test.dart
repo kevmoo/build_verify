@@ -1,4 +1,5 @@
 @Timeout.factor(4)
+library;
 
 import 'package:build_verify/src/impl.dart';
 import 'package:build_verify/src/utils.dart';

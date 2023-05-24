@@ -1,3 +1,7 @@
+## 3.1.1-wip
+
+- Require Dart >= 3.0.0
+
 ## 3.1.0
 
 - `expectBuildClean`: add `gitDiffPathArguments` parameter.
