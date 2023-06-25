@@ -18,8 +18,8 @@ void main() {
       d.dir('lib', [
         d.dir('src', [
           getGeneratedVersionFile(),
-        ])
-      ])
+        ]),
+      ]),
     ]).create();
 
     await d.dir('package_b', [
@@ -27,8 +27,8 @@ void main() {
       d.dir('lib', [
         d.dir('src', [
           getGeneratedVersionFile(),
-        ])
-      ])
+        ]),
+      ]),
     ]).create();
 
     final gitDir = await GitDir.init(d.sandbox, allowContent: true);
@@ -75,8 +75,8 @@ void main() {
         d.dir('lib', [
           d.dir('src', [
             getGeneratedVersionFile(version: '1.2.4'),
-          ])
-        ])
+          ]),
+        ]),
       ]).create();
 
       await expectBuildCleanImpl(
