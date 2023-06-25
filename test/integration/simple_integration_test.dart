@@ -22,7 +22,7 @@ void main() {
     await d.dir('lib', [
       d.dir('src', [
         getGeneratedVersionFile(),
-      ])
+      ]),
     ]).create();
 
     gitDir = await GitDir.init(d.sandbox, allowContent: true);

@@ -78,7 +78,7 @@ Future<String> _changedGeneratedFiles(
       [
         'diff',
         '--relative',
-        if (gitDiffPathArguments != null) ...['--', ...gitDiffPathArguments]
+        if (gitDiffPathArguments != null) ...['--', ...gitDiffPathArguments],
       ],
       workingDir,
     );

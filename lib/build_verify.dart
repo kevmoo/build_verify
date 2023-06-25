@@ -8,7 +8,7 @@ const defaultCommand = [
   'run',
   'build_runner',
   'build',
-  '--delete-conflicting-outputs'
+  '--delete-conflicting-outputs',
 ];
 
 /// If [customCommand] is not specified, [defaultCommand] is used.
