@@ -40,6 +40,8 @@ Future<void> expectBuildCleanImpl(
     reason: 'The working directory should be clean before running build.',
   );
 
+  await _runProc(dartPath, ['run', 'build_runner', 'clean'], workingDir);
+
   var executable = command.first;
   if (executable == 'DART') {
     executable = dartPath;
