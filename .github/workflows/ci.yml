@@ -23,7 +23,7 @@ jobs:
         sdk: [dev]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: dart-lang/setup-dart@0a8a0fc875eb934c15d08629302413c671d3f672
+      - uses: dart-lang/setup-dart@e630b99d28a3b71860378cafdc2a067c71107f94
         with:
           sdk: ${{ matrix.sdk }}
       - id: install
@@ -45,7 +45,7 @@ jobs:
         sdk: [3.4, dev]
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-    - uses: dart-lang/setup-dart@0a8a0fc875eb934c15d08629302413c671d3f672
+    - uses: dart-lang/setup-dart@e630b99d28a3b71860378cafdc2a067c71107f94
       with:
         sdk: ${{ matrix.sdk }}
     - id: install
@@ -68,7 +68,7 @@ jobs:
         flutter-channel: [stable]
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-    - uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1
+    - uses: subosito/flutter-action@74af56c5ed2697ba4621264652728e8d217e53d3
       with:
         channel: ${{ matrix.flutter-channel }}
     - id: install
