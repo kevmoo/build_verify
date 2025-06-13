@@ -65,7 +65,10 @@ Future<void> expectBuildCleanImpl(
 void expectResultOutputSucceeds(String result) {
   expect(
     result,
-    contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')),
+    anyOf(
+      contains('Built with build_runner'),
+      contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')),
+    ),
   );
 }
 
