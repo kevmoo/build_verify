@@ -1,5 +1,6 @@
-## 3.1.1-wip
+## 3.1.1
 
+- Support upcoming build ecosystem changes.
 - Require Dart >= 3.4.0
 
 ## 3.1.0
