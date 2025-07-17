@@ -89,7 +89,8 @@ Future<String> _runProc(
   String workingDir,
 ) async {
   print(
-    'Running: `${ansi.cyan.wrap([proc, ...args].join(' '))}` in `${ansi.cyan.wrap(workingDir)}`',
+    'Running: `${ansi.cyan.wrap([proc, ...args].join(' '))}` '
+    'in `${ansi.cyan.wrap(workingDir)}`',
   );
 
   final process = await Process.start(proc, args, workingDirectory: workingDir);
