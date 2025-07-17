@@ -1,3 +1,7 @@
+## 3.1.2-wip
+
+- Require `sdk: ^3.7.0`
+
 ## 3.1.1
 
 - Support upcoming build ecosystem changes.
