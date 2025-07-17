@@ -20,20 +20,17 @@ void main() {
     await getPubspecYamlFile('example').create();
 
     await d.dir('lib', [
-      d.dir('src', [
-        getGeneratedVersionFile(),
-      ]),
+      d.dir('src', [getGeneratedVersionFile()]),
     ]).create();
 
     gitDir = await GitDir.init(d.sandbox, allowContent: true);
     await gitDir.runCommand(['add', '.']);
     await gitDir.runCommand(['commit', '-am', 'test']);
 
-    final process = await TestProcess.start(
-      dartPath,
-      ['pub', 'get'],
-      workingDirectory: d.sandbox,
-    );
+    final process = await TestProcess.start(dartPath, [
+      'pub',
+      'get',
+    ], workingDirectory: d.sandbox);
 
     await process.shouldExit(0);
   });
@@ -55,10 +52,7 @@ void main() {
       await sink.close();
     });
     test('should fail', () async {
-      await expectLater(
-        expectBuildCleanImpl(d.sandbox),
-        throwsATestFailure,
-      );
+      await expectLater(expectBuildCleanImpl(d.sandbox), throwsATestFailure);
     });
     test('should not fail if ignored', () async {
       await expectBuildCleanImpl(
