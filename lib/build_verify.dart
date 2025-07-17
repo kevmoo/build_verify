@@ -30,10 +30,9 @@ Future<void> expectBuildClean({
   String? packageRelativeDirectory,
   List<String> customCommand = defaultCommand,
   List<String>? gitDiffPathArguments,
-}) =>
-    expectBuildCleanImpl(
-      Directory.current.resolveSymbolicLinksSync(),
-      command: customCommand,
-      packageRelativeDirectory: packageRelativeDirectory,
-      gitDiffPathArguments: gitDiffPathArguments,
-    );
+}) => expectBuildCleanImpl(
+  Directory.current.resolveSymbolicLinksSync(),
+  command: customCommand,
+  packageRelativeDirectory: packageRelativeDirectory,
+  gitDiffPathArguments: gitDiffPathArguments,
+);

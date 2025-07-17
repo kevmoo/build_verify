@@ -16,18 +16,14 @@ void main() {
     await d.dir('package_a', [
       getPubspecYamlFile('package_a'),
       d.dir('lib', [
-        d.dir('src', [
-          getGeneratedVersionFile(),
-        ]),
+        d.dir('src', [getGeneratedVersionFile()]),
       ]),
     ]).create();
 
     await d.dir('package_b', [
       getPubspecYamlFile('package_b'),
       d.dir('lib', [
-        d.dir('src', [
-          getGeneratedVersionFile(),
-        ]),
+        d.dir('src', [getGeneratedVersionFile()]),
       ]),
     ]).create();
 
@@ -35,19 +31,17 @@ void main() {
     await gitDir.runCommand(['add', '.']);
     await gitDir.runCommand(['commit', '-am', 'test']);
 
-    final packageAProcess = await TestProcess.start(
-      dartPath,
-      ['pub', 'get'],
-      workingDirectory: '${d.sandbox}/package_a',
-    );
+    final packageAProcess = await TestProcess.start(dartPath, [
+      'pub',
+      'get',
+    ], workingDirectory: '${d.sandbox}/package_a');
 
     await packageAProcess.shouldExit(0);
 
-    final packageBProcess = await TestProcess.start(
-      dartPath,
-      ['pub', 'get'],
-      workingDirectory: '${d.sandbox}/package_b',
-    );
+    final packageBProcess = await TestProcess.start(dartPath, [
+      'pub',
+      'get',
+    ], workingDirectory: '${d.sandbox}/package_b');
 
     await packageBProcess.shouldExit(0);
   });
@@ -73,9 +67,7 @@ void main() {
       await d.dir('package_b', [
         getPubspecYamlFile('package_b'),
         d.dir('lib', [
-          d.dir('src', [
-            getGeneratedVersionFile(version: '1.2.4'),
-          ]),
+          d.dir('src', [getGeneratedVersionFile(version: '1.2.4')]),
         ]),
       ]).create();
 

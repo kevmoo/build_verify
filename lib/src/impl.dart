@@ -20,8 +20,10 @@ Future<void> expectBuildCleanImpl(
     throw ArgumentError.value(command, 'customCommand', 'Cannot be empty');
   }
 
-  final repoRoot =
-      await _runProc('git', ['rev-parse', '--show-toplevel'], workingDir);
+  final repoRoot = await _runProc('git', [
+    'rev-parse',
+    '--show-toplevel',
+  ], workingDir);
   final pkgDir = p.join(repoRoot, packageRelativeDirectory);
   if (!p.equals(pkgDir, workingDir)) {
     throw StateError(
@@ -75,16 +77,11 @@ void expectResultOutputSucceeds(String result) {
 Future<String> _changedGeneratedFiles(
   String workingDir, {
   required List<String>? gitDiffPathArguments,
-}) =>
-    _runProc(
-      'git',
-      [
-        'diff',
-        '--relative',
-        if (gitDiffPathArguments != null) ...['--', ...gitDiffPathArguments],
-      ],
-      workingDir,
-    );
+}) => _runProc('git', [
+  'diff',
+  '--relative',
+  if (gitDiffPathArguments != null) ...['--', ...gitDiffPathArguments],
+], workingDir);
 
 Future<String> _runProc(
   String proc,
@@ -92,9 +89,8 @@ Future<String> _runProc(
   String workingDir,
 ) async {
   print(
-    'Running: `${ansi.cyan.wrap(
-      [proc, ...args].join(' '),
-    )}` in `${ansi.cyan.wrap(workingDir)}`',
+    'Running: `${ansi.cyan.wrap([proc, ...args].join(' '))}` '
+    'in `${ansi.cyan.wrap(workingDir)}`',
   );
 
   final process = await Process.start(proc, args, workingDirectory: workingDir);
@@ -102,11 +98,10 @@ Future<String> _runProc(
   Future<void> transform(
     Stream<List<int>> standardChannel, {
     List<String>? lines,
-  }) =>
-      standardChannel
-          .transform(const SystemEncoding().decoder)
-          .transform(const LineSplitter())
-          .forEach((element) {
+  }) => standardChannel
+      .transform(const SystemEncoding().decoder)
+      .transform(const LineSplitter())
+      .forEach((element) {
         print(element);
         lines?.add(element);
       });

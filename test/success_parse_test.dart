@@ -20,10 +20,7 @@ void main() {
     test('failing output with ${_humanReadable(duration)}', () {
       final output = '[INFO] Failed after ${_humanReadable(duration)}';
 
-      expect(
-        () => expectResultOutputSucceeds(output),
-        throwsATestFailure,
-      );
+      expect(() => expectResultOutputSucceeds(output), throwsATestFailure);
     });
   }
 }
