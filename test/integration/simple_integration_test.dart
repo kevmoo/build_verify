@@ -61,4 +61,72 @@ void main() {
       );
     });
   });
+
+  group('afterBuildCommand without file changes', () {
+    test(
+      'should succeed if afterBuildCommand does not produce git changes',
+      () async {
+        final afterBuildCommand = [dartPlaceHolder, 'pub', 'get'];
+        await expectBuildCleanImpl(
+          d.sandbox,
+          afterBuildCommand: afterBuildCommand,
+        );
+      },
+    );
+
+    test(
+      'should fail if afterBuildCommand itself fails (e.g. command not exists)',
+      () async {
+        final failingAfterBuildCommand = ['this_command_does_not_exist'];
+
+        await expectLater(
+          expectBuildCleanImpl(
+            d.sandbox,
+            afterBuildCommand: failingAfterBuildCommand,
+          ),
+          throwsA(isA<ProcessException>()),
+        );
+      },
+    );
+  });
+
+  group('afterBuildCommand when a file changes', () {
+    const pubspecLockFileName = 'pubspec.lock';
+
+    setUp(() async {
+      await gitDir.runCommand(['add', pubspecLockFileName]);
+      await gitDir.runCommand(['commit', '-am', 'commit pubspec']);
+    });
+
+    test('should fail if afterBuildCommand produces git changes', () async {
+      final afterBuildCommand = [
+        'sh',
+        '-c',
+        'echo "new content just for this test" > $pubspecLockFileName',
+      ];
+
+      await expectLater(
+        expectBuildCleanImpl(d.sandbox, afterBuildCommand: afterBuildCommand),
+        throwsATestFailure,
+      );
+    });
+
+    test(
+      'should succeed if afterBuildCommand produces git changes which are then '
+      'ignored by gitDiffPathArguments',
+      () async {
+        final afterBuildCommand = [
+          'sh',
+          '-c',
+          'echo "new content just for this test" > $pubspecLockFileName',
+        ];
+
+        await expectBuildCleanImpl(
+          d.sandbox,
+          afterBuildCommand: afterBuildCommand,
+          gitDiffPathArguments: [':!$pubspecLockFileName'],
+        );
+      },
+    );
+  });
 }
