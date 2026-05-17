@@ -20,6 +20,9 @@ const defaultCommand = [
 /// with the full, platform-specific path to the corresponding executable in the
 /// currently executing SDK.
 ///
+/// If [afterBuildCommand] is specified, it will be run after the build and
+/// has the same behavior as [customCommand].
+///
 /// If provided, [gitDiffPathArguments] are passed as `-- <path>` to `git diff`.
 /// This can be useful if you want to include certain files from the diff
 /// calculation.
@@ -29,10 +32,12 @@ const defaultCommand = [
 Future<void> expectBuildClean({
   String? packageRelativeDirectory,
   List<String> customCommand = defaultCommand,
+  List<String>? afterBuildCommand,
   List<String>? gitDiffPathArguments,
 }) => expectBuildCleanImpl(
   Directory.current.resolveSymbolicLinksSync(),
   command: customCommand,
+  afterBuildCommand: afterBuildCommand,
   packageRelativeDirectory: packageRelativeDirectory,
   gitDiffPathArguments: gitDiffPathArguments,
 );

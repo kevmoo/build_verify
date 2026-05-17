@@ -13,6 +13,7 @@ const dartPlaceHolder = 'DART';
 Future<void> expectBuildCleanImpl(
   String workingDir, {
   List<String> command = defaultCommand,
+  List<String>? afterBuildCommand,
   String? packageRelativeDirectory,
   List<String>? gitDiffPathArguments,
 }) async {
@@ -54,7 +55,19 @@ Future<void> expectBuildCleanImpl(
 
   expectResultOutputSucceeds(result);
 
-  // 3 - get a list of modified files after the build - should still be empty
+  // 3 - run after build command
+  if (afterBuildCommand != null && afterBuildCommand.isNotEmpty) {
+    var executable = afterBuildCommand.first;
+    if (executable == 'DART') {
+      executable = dartPath;
+    }
+
+    final arguments = afterBuildCommand.skip(1).toList();
+
+    await _runProc(executable, arguments, workingDir);
+  }
+
+  // 4 - get a list of modified files after the build - should still be empty
   expect(
     await _changedGeneratedFiles(
       workingDir,
