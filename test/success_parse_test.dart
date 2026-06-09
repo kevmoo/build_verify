@@ -1,7 +1,6 @@
 import 'package:build_verify/src/impl.dart';
+import 'package:checks/checks.dart';
 import 'package:test/test.dart';
-
-import 'test_shared.dart';
 
 void main() {
   for (var duration in [
@@ -20,7 +19,7 @@ void main() {
     test('failing output with ${_humanReadable(duration)}', () {
       final output = '[INFO] Failed after ${_humanReadable(duration)}';
 
-      expect(() => expectResultOutputSucceeds(output), throwsATestFailure);
+      check(() => expectResultOutputSucceeds(output)).throws<TestFailure>();
     });
   }
 }

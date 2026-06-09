@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:checks/checks.dart';
 import 'package:io/ansi.dart' as ansi;
 import 'package:path/path.dart' as p;
-import 'package:test/test.dart';
 
 import '../build_verify.dart';
 import 'utils.dart';
@@ -33,14 +33,13 @@ Future<void> expectBuildCleanImpl(
   }
 
   // 1 - get a list of modified files files - should be empty
-  expect(
+  check(
     await _changedGeneratedFiles(
       workingDir,
       gitDiffPathArguments: gitDiffPathArguments,
     ),
-    isEmpty,
-    reason: 'The working directory should be clean before running build.',
-  );
+    because: 'The working directory should be clean before running build.',
+  ).isEmpty();
 
   var executable = command.first;
   if (executable == 'DART') {
@@ -55,23 +54,20 @@ Future<void> expectBuildCleanImpl(
   expectResultOutputSucceeds(result);
 
   // 3 - get a list of modified files after the build - should still be empty
-  expect(
+  check(
     await _changedGeneratedFiles(
       workingDir,
       gitDiffPathArguments: gitDiffPathArguments,
     ),
-    isEmpty,
-  );
+  ).isEmpty();
 }
 
 void expectResultOutputSucceeds(String result) {
-  expect(
-    result,
-    anyOf(
-      contains('Built with build_runner'),
-      contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')),
-    ),
-  );
+  check(result).anyOf([
+    (it) => it.contains('Built with build_runner'),
+    (it) =>
+        it.contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')),
+  ]);
 }
 
 Future<String> _changedGeneratedFiles(

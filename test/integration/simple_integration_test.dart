@@ -5,12 +5,12 @@ import 'dart:io';
 
 import 'package:build_verify/src/impl.dart';
 import 'package:build_verify/src/utils.dart';
+import 'package:checks/checks.dart';
 import 'package:git/git.dart';
 import 'package:test/test.dart';
 import 'package:test_descriptor/test_descriptor.dart' as d;
 import 'package:test_process/test_process.dart';
 
-import '../test_shared.dart';
 import 'helpers.dart';
 
 void main() {
@@ -52,7 +52,7 @@ void main() {
       await sink.close();
     });
     test('should fail', () async {
-      await expectLater(expectBuildCleanImpl(d.sandbox), throwsATestFailure);
+      await check(expectBuildCleanImpl(d.sandbox)).throws<TestFailure>();
     });
     test('should not fail if ignored', () async {
       await expectBuildCleanImpl(
