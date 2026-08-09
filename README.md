@@ -1,13 +1,13 @@
 [![Pub](https://img.shields.io/pub/v/build_verify.svg)](https://pub.dev/packages/build_verify)
 
-Test utility to ensure generated Dart code within a package is up-to-date
-when using `package:build`.
+Test utility to ensure generated Dart code within a package is up-to-date when
+using `package:build`.
 
 ### Usage
 
 Assuming your package is already configured to use `package:build_runner` –
-`pub run build_runner build` succeeds – then simply add a unit test to the
-test directory.
+`pub run build_runner build` succeeds – then simply add a unit test to the test
+directory.
 
 For example: `test/ensure_build_test.dart` containing:
 
