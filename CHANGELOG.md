@@ -1,5 +1,6 @@
 ## 3.1.2-wip
 
+- `expectBuildClean`: add `clean` to run `build_runner clean` first.
 - Require `sdk: ^3.10.0`
 
 ## 3.1.1
