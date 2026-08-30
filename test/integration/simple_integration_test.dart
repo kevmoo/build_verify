@@ -39,6 +39,10 @@ void main() {
     await expectBuildCleanImpl(d.sandbox);
   });
 
+  test('success after cleaning the build cache', () async {
+    await expectBuildCleanImpl(d.sandbox, clean: true);
+  });
+
   group('when a file changes', () {
     setUp(() async {
       await gitDir.runCommand(['add', 'pubspec.lock']);
