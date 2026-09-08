@@ -16,9 +16,9 @@ const defaultCommand = [
 /// The first item in [customCommand] is used as the executable to run. The
 /// remaining values are used as the executable arguments.
 ///
-/// If the first value is `PUB` or `DART` (case-sensitive), it will be replaced
-/// with the full, platform-specific path to the corresponding executable in the
-/// currently executing SDK.
+/// If the first value is `DART` (case-sensitive), it will be replaced
+/// with the path to the `dart` executable in the current SDK (or `'dart'`
+/// if no SDK path could be resolved).
 ///
 /// If provided, [gitDiffPathArguments] are passed as `-- <path>` to `git diff`.
 /// This can be useful if you want to include certain files from the diff
