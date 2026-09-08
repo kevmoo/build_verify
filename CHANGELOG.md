@@ -1,5 +1,6 @@
 ## 3.1.2-wip
 
+- Migrate `dart` executable lookup to `package:cli_util` (`dartExecutable ?? 'dart'`).
 - Require `sdk: ^3.10.0`
 
 ## 3.1.1
