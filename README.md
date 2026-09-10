@@ -19,3 +19,6 @@ void main() {
   test('ensure_build', expectBuildClean);
 }
 ```
+
+Pass `clean: true` if you want `build_runner clean` to run before the build so
+cached outputs cannot hide a stale generated file.

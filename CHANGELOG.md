@@ -1,6 +1,7 @@
 ## 3.1.2-wip
 
 - Migrate `dart` executable lookup to `package:cli_util` (`dartExecutable ?? 'dart'`).
+- `expectBuildClean`: add `clean` to run `build_runner clean` first.
 - Require `sdk: ^3.10.0`
 
 ## 3.1.1

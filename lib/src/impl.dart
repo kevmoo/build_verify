@@ -15,6 +15,7 @@ Future<void> expectBuildCleanImpl(
   List<String> command = defaultCommand,
   String? packageRelativeDirectory,
   List<String>? gitDiffPathArguments,
+  bool clean = false,
 }) async {
   if (command.isEmpty) {
     throw ArgumentError.value(command, 'customCommand', 'Cannot be empty');
@@ -48,12 +49,17 @@ Future<void> expectBuildCleanImpl(
 
   final arguments = command.skip(1).toList();
 
-  // 2 - run build - should be no output, since nothing should change
+  // 2 - optionally wipe the build cache so outputs are regenerated
+  if (clean) {
+    await _runProc(dartPath, ['run', 'build_runner', 'clean'], workingDir);
+  }
+
+  // 3 - run build - should be no output, since nothing should change
   final result = await _runProc(executable, arguments, workingDir);
 
   expectResultOutputSucceeds(result);
 
-  // 3 - get a list of modified files after the build - should still be empty
+  // 4 - get a list of modified files after the build - should still be empty
   check(
     await _changedGeneratedFiles(
       workingDir,

@@ -26,13 +26,18 @@ const defaultCommand = [
 ///
 /// For example `[':!pubspec.lock']` can be used to ignore changes to the
 /// `pubspec.lock` file.
+///
+/// If [clean] is `true`, `dart run build_runner clean` runs before the build
+/// so cached outputs are discarded and generated files are rebuilt.
 Future<void> expectBuildClean({
   String? packageRelativeDirectory,
   List<String> customCommand = defaultCommand,
   List<String>? gitDiffPathArguments,
+  bool clean = false,
 }) => expectBuildCleanImpl(
   Directory.current.resolveSymbolicLinksSync(),
   command: customCommand,
   packageRelativeDirectory: packageRelativeDirectory,
   gitDiffPathArguments: gitDiffPathArguments,
+  clean: clean,
 );
