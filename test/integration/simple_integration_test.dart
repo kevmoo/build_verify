@@ -39,6 +39,26 @@ void main() {
     await expectBuildCleanImpl(d.sandbox);
   });
 
+  test('success after cleaning the build cache', () async {
+    await expectBuildCleanImpl(d.sandbox);
+
+    final entrypointDir = Directory('${d.sandbox}/.dart_tool/build/entrypoint');
+    check(
+      entrypointDir.existsSync(),
+      because: 'the first build should create a cache to clean',
+    ).isTrue();
+
+    final marker = File('${entrypointDir.path}/stale-cache-marker');
+    await marker.writeAsString('stale');
+
+    await expectBuildCleanImpl(d.sandbox, clean: true);
+
+    check(
+      marker.existsSync(),
+      because: 'build_runner clean should wipe the previous cache',
+    ).isFalse();
+  });
+
   group('when a file changes', () {
     setUp(() async {
       await gitDir.runCommand(['add', 'pubspec.lock']);
