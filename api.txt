@@ -1,0 +1,10 @@
+environment:
+  sdk: ^3.12.0
+package:build_verify/build_verify.dart:
+  defaultCommand (static const getter: List<String>)
+  expectBuildClean (function: Future<void> Function({List<String> customCommand, List<String>? gitDiffPathArguments, String? packageRelativeDirectory}))
+dart:async:
+  Future (referenced)
+dart:core:
+  List (referenced)
+  String (referenced)
