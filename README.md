@@ -11,7 +11,7 @@ directory.
 
 For example: `test/ensure_build_test.dart` containing:
 
-```dart
+```dart @example example/example.dart
 import 'package:build_verify/build_verify.dart';
 import 'package:test/test.dart';
 
