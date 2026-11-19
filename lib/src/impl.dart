@@ -39,7 +39,7 @@ Future<void> expectBuildCleanImpl(
       gitDiffPathArguments: gitDiffPathArguments,
     ),
     because: 'The working directory should be clean before running build.',
-  ).isEmpty();
+  ).isEmpty;
 
   var executable = command.first;
   if (executable == 'DART') {
@@ -59,14 +59,13 @@ Future<void> expectBuildCleanImpl(
       workingDir,
       gitDiffPathArguments: gitDiffPathArguments,
     ),
-  ).isEmpty();
+  ).isEmpty;
 }
 
 void expectResultOutputSucceeds(String result) {
   check(result).anyOf([
-    (it) => it.contains('Built with build_runner'),
-    (it) =>
-        it.contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')),
+    .it()..contains('Built with build_runner'),
+    .it()..contains(RegExp(r'\[INFO\] Succeeded after .+ with \d+ outputs')),
   ]);
 }
 
